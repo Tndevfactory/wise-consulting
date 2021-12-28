@@ -15,7 +15,7 @@ const nextConfig = {
             value: 'Something',
           },
           {
-            key: 'Server',
+            key: 'server',
             value: 'Something',
           },
         ],
