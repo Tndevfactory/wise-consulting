@@ -1,0 +1,427 @@
+
+, router
+  key={router.route}
+
+// import {router} from "next/client";
+// import { QueryClient, QueryClientProvider } from "react-query";
+// import { ReactQueryDevtools } from "react-query/devtools";
+// import { TndevProvider } from "../contexts/TndevContext";
+
+// const queryClient = new QueryClient();
+
+  // useEffect(() => {
+  //  theme = darkThemet ?  darkTheme : lightTheme;
+  //
+  // }, []);
+  //
+  // const th =()=> {
+  //  theme = darkThemet ?  darkTheme : lightTheme;
+  //   return theme
+  // }
+
+  //console.log(thene)
+  // <QueryClientProvider client={queryClient}>
+
+    // <TndevProvider>
+      // </TndevProvider>
+
+        // <ReactQueryDevtools initialIsOpen />
+      // </QueryClientProvider>
+      -----------------------------------------
+        /** @format */
+        let url = "";
+        let domain = "";
+        const env = process.env.NODE_ENV;
+        if (env == "development") {
+          url = "http://127.0.0.1:8000/api";
+          d = "http://localhost:8000";
+          // d = "https://tndev3.tn-devfactory.com";
+        } else if (env == "production") {
+          url = "https://tndev3.tn-devfactory.com/api";
+          d = "https://tndev3.tn-devfactory.com";
+        }
+        //
+        const path = require("path");
+        module.exports = {
+          env: {
+            BASE_URL: url,
+            DOMAIN: d,
+          },
+          images: {
+            domains: ["localhost", "tndev3.tn-devfactory.com"],
+          },
+          webpack(config, options) {
+            config.module.rules.push({
+              test: /.mp3$/,
+              use: {
+                loader: "file-loader",
+              },
+            });
+            return config;
+          },
+        };
+        --------------------------------------------------
+          import Form from "../components/Form"
+          import { useState, useEffect, useRef } from "react";
+          import { useLocalStorage } from '../hooks/useLocalStorage'
+          import Head from "next/head";
+          import Image from "next/image";
+          import styles from "../styles/Home.module.css";
+          import { gsap } from "gsap";
+          import React from "react";
+          import Box from "@mui/material/Box";
+          import ListItem from "@mui/material/ListItem";
+          import ListItemButton from "@mui/material/ListItemButton";
+          import Divider from "@mui/material/Divider";
+          import ListItemText from "@mui/material/ListItemText";
+          import List from "@mui/material/List";
+          import InboxIcon from "@mui/icons-material/Inbox";
+          import DraftsIcon from "@mui/icons-material/Drafts";
+          import ListItemIcon from "@mui/material/ListItemIcon";
+          import Typography from "@mui/material/Typography";
+          import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+          import styled, { css } from "styled-components";
+
+          const Desktop = styled.div`
+
+            min-height: 50vh;
+            width: ${({ width }) => width ? width + "rem" : "10rem"};
+            background-color:${({ theme }) => theme.colors.primary};
+            display: flex;
+
+          `;
+
+          export default function Home() {
+            const [largeur, setLargeur] = useLocalStorage('largeur', 1);
+            const [larg, setLarg] = useState(1);
+
+            gsap.registerPlugin(ScrollTrigger);
+            const tl = React.useRef();
+            const tlRef = React.useRef();
+            const boxRef = React.useRef();
+
+            React.useEffect(() => {
+              const box = tlRef.current;
+              const prjs = box.querySelectorAll(".prj");
+              const texts = box.querySelectorAll(".text");
+              let timeline = tl.current;
+
+
+               timeline = gsap.timeline().to(prjs, {
+                x: 460,
+                stagger: 0.3,
+                scrollTrigger: {
+                  trigger: box,
+                  toggleActions: "restart pause reverse pause",
+                  markers: true,
+                  id: "my-tl",
+                  start: "top 60%",
+                  end: "bottom 5%",
+                  scrub: 1,
+                },
+              }).to(texts,{
+                x:500,
+                stagger: 0.3,
+                scrollTrigger: {
+                  trigger: box,
+                  toggleActions: "restart pause reverse pause",
+                  markers: true,
+                  id: "my-tl",
+                  start: "top 60%",
+                  end: "bottom 5%",
+                  scrub: 1,
+                },
+              });
+            }, []);
+
+            React.useEffect(() => {
+                setLarg(5);
+
+          },[larg])
+
+            return (
+              <div className={styles.container}>
+                <Head>
+                  <title>Create Next App</title>
+                  <meta name="description" content="Generated by create next app" />
+                  <link rel="icon" href="/favicon.ico" />
+                </Head>
+
+                <main className={styles.main}>
+                <Desktop width={ 6 }>
+
+                 </Desktop>
+
+
+                <Form/>
+                  <h1 className={styles.title }>Welcome ch</h1>
+                  <div className={styles.app}>tttttt appp</div>
+
+                  <p className={styles.description}>
+                    Get started by editing{" "}
+                    <code className={styles.code}>pages/index.js</code>
+                  </p>
+
+                  <div className={styles.grid}>
+                    <a href="" className={styles.card}>
+                      <h2>Documentation &rarr;</h2>
+                      <p>Find in-depth information about Next.js features and API.</p>
+                    </a>
+
+                    <a href="" className={styles.card}>
+                      <h2>Learn &rarr;</h2>
+                      <p>Learn about Next.js in an interactive course with quizzes!</p>
+                    </a>
+
+                    <a
+                      href="https://github.com/vercel/next.js/tree/master/examples"
+                      className={styles.card}
+                    >
+                      <h2>Examples &rarr;</h2>
+                      <p>Discover and deploy boilerplate example Next.js projects.</p>
+                    </a>
+
+                    <a
+                      href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                      className={styles.card}
+                    >
+                      <h2>Deploy &rarr;</h2>
+                      <p>
+                        Instantly deploy your Next.js site to a public URL with Vercel.
+                      </p>
+                    </a>
+                  </div>
+                  <p>
+                    Instantly deploy your Next.js site to a public URL with Vercel.
+                    Instantly deploy your Next.js site to a public URL with Vercel.
+                    Instantly deploy your Next.js site to a public URL with Vercel.
+                  </p>
+                  <Box
+                    className={styles.tlRef}
+                    ref={tlRef}
+                    sx={{ width: "100%", maxWidth: 560, bgcolor: "background.paper" }}
+                  >
+                    <nav aria-label="main mailbox folders">
+                      <div className="prj">elem1</div>
+                      <div className="text">
+                        text 1------------------------------------
+                      </div>
+                      <div className="prj">elem2</div>
+                      <div className="text">
+                        text 2------------------------------------
+                      </div>
+                      <div className="prj">elem3</div>
+                      <div className="text">
+                        text 3------------------------------------
+                      </div>
+                      <div className="prj">elem4</div>
+                      <div className="text">
+                        text 4-----------------------------------
+                      </div>
+                      <List>
+                        <ListItem disablePadding>
+                          <ListItemButton>
+                            <ListItemIcon>
+                              <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Inbox" />
+                          </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemButton>
+                            <ListItemIcon>
+                              <DraftsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Drafts" />
+                          </ListItemButton>
+                        </ListItem>
+                      </List>
+                    </nav>
+                    <Divider />
+                    <nav aria-label="secondary mailbox folders">
+                      <List>
+                        <ListItem disablePadding>
+                          <ListItemButton>
+                            <ListItemText primary="Trash" />
+                          </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemButton component="a" href="#simple-list">
+                            <ListItemText primary="Spam" />
+                          </ListItemButton>
+                        </ListItem>
+                      </List>
+                    </nav>
+                  </Box>
+
+                  <div className={styles.box} ref={boxRef}>
+                    Hello
+                    <div className="second">second element</div>
+                    <div className={styles.fur} id="furid">
+                      fr element ######################
+                    </div>
+                  </div>
+                  <Box sx={{ width: "100%", maxWidth: 500 }}>
+                    <Typography variant="h1" component="div" gutterBottom>
+                      h1. Heading
+                    </Typography>
+                    <Typography variant="h2" gutterBottom component="div">
+                      h2. Heading
+                    </Typography>
+                    <Typography variant="h3" gutterBottom component="div">
+                      h3. Heading
+                    </Typography>
+                    <Typography variant="h4" gutterBottom component="div">
+                      h4. Heading
+                    </Typography>
+                    <Typography variant="h5" gutterBottom component="div">
+                      h5. Heading
+                    </Typography>
+                    <Typography variant="h6" gutterBottom component="div">
+                      h6. Heading
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom component="div">
+                      subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quos blanditiis tenetur
+                    </Typography>
+                    <Typography variant="subtitle2" gutterBottom component="div">
+                      subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quos blanditiis tenetur
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                      body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
+                      consectetur, neque doloribus, cupiditate numquam dignissimos laborum
+                      fugiat deleniti? Eum quasi quidem quibusdam.
+                    </Typography>
+                    <Typography variant="body2" gutterBottom>
+                      body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
+                      consectetur, neque doloribus, cupiditate numquam dignissimos laborum
+                      fugiat deleniti? Eum quasi quidem quibusdam.
+                    </Typography>
+                    <Typography variant="button" display="block" gutterBottom>
+                      button text
+                    </Typography>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      caption text
+                    </Typography>
+                    <Typography variant="overline" display="block" gutterBottom>
+                      overline text
+                    </Typography>
+                  </Box>
+                </main>
+                <footer className={styles.footer}>
+                  <a
+                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Powered by{" "}
+                    <span className={styles.logo}>
+                      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+                    </span>
+                  </a>
+                </footer>
+              </div>
+            );
+          }
+          ----------------------------------------------------------
+
+            import Form from "../components/Form";
+            import { useState, useEffect, useRef } from "react";
+            import { useLocalStorage } from "../hooks/useLocalStorage";
+            import Head from "next/head";
+            import Image from "next/image";
+            import styles from "../styles/Home.module.css";
+            import { gsap } from "gsap";
+            import React from "react";
+            import Box from "@mui/material/Box";
+            import ListItem from "@mui/material/ListItem";
+            import ListItemButton from "@mui/material/ListItemButton";
+            import Divider from "@mui/material/Divider";
+            import ListItemText from "@mui/material/ListItemText";
+            import List from "@mui/material/List";
+            import InboxIcon from "@mui/icons-material/Inbox";
+            import DraftsIcon from "@mui/icons-material/Drafts";
+            import ListItemIcon from "@mui/material/ListItemIcon";
+            import Typography from "@mui/material/Typography";
+            import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+            import styled, { css } from "styled-components";
+            import Cookies from "js-cookie";
+            import Stack from "@mui/material/Stack";
+            import Button from "@mui/material/Button";
+            import LightModeIcon from "@mui/icons-material/LightMode";
+            import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
+            import IconButton from "@mui/material/IconButton";
+            import { red } from '@mui/material/colors';
+            import { blueGrey } from '@mui/material/colors';
+            import { cyan } from '@mui/material/colors';
+
+            const Desktop = styled.div`
+              min-height: 50vh;
+              width: "15rem";
+              background-color: ${({ darkTheme, theme }) =>
+                darkTheme === "1" ? theme.colors.dark : theme.colors.primary};
+              display: flex;
+            `;
+
+            export default function Home() {
+              const [darkCk, setDarkCk] = useState("0");
+
+              gsap.registerPlugin(ScrollTrigger);
+
+              const darkMode = (val) => {
+                Cookies.set("dark", val);
+                const darkCookie = Cookies.get("dark") ? Cookies.get("dark") : "0";
+                setDarkCk(darkCookie);
+              };
+
+              React.useEffect(() => {
+                const darkCookie = Cookies.get("dark") ? Cookies.get("dark") : "0";
+                setDarkCk(darkCookie);
+              }, [darkCk]);
+
+              return (
+                <>
+                  <Head>
+                    <title>Create Next App</title>
+                    <meta name="description" content="Generated by create next app" />
+                    <link rel="icon" href="/favicon.ico" />
+                  </Head>
+
+                  <main className={styles.main}>
+                    <h1>
+                      {" "}
+                      &nbsp; {darkCk !== "1" ? "darkCk not equal 1" : "darkCk equal 1"}{" "}
+                    </h1>
+                    <h1> &nbsp; {typeof darkCk} </h1>
+                    <h1> &nbsp; {darkCk} </h1>
+                    <Stack spacing={2} direction="row">
+
+                      {darkCk === "0" && (
+                        <IconButton
+                          sx={{color: blueGrey[900]}}
+                          aria-label="dark mode on"
+                          onClick={() => darkMode("1")}
+                        >
+                          <NightlightRoundIcon />
+                        </IconButton>
+                      )}
+                      {darkCk === "1" && (
+                        <IconButton
+                          sx={{color: cyan[300]}}
+                          aria-label="light mode on"
+                          onClick={() => darkMode("0")}
+                        >
+                          <LightModeIcon />
+                        </IconButton>
+                      )}
+                    </Stack>
+                    <Desktop darkTheme={darkCk}></Desktop>
+                  </main>
+
+                  <footer className={styles.footer}></footer>
+                </>
+              );
+            }
