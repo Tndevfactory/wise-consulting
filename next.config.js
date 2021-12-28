@@ -12,7 +12,7 @@ const nextConfig = {
         headers: [
           {
             key: 'X-Powered-By',
-            value: 'https://tndev-art.tn Email: tndev8@gmail.com',
+            value: 'https://tndev-art.tn | tndev8@gmail.com',
           },
           {
             key: 'server',
