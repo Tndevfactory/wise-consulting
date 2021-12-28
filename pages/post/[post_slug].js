@@ -41,6 +41,9 @@ import Container from "@mui/material/Container";
 
 export default function Post() {
   const router = useRouter();
+  if (router.isFallback) {
+    <h1>Data is loading</h1>;
+  }
   const [methods, states] = TndevCtx();
   const { darkColor } = states;
   const { authMethods } = methods;

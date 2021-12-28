@@ -28,33 +28,25 @@ api.interceptors.request.use(function (config) {
 
 // checkerController user and auth handler
 
-export const apiListeArticles= async () => {
+export const apiListeArticles = async () => {
   const { data } = await api.get("/articles");
   return data;
 };
 
-export const helloMethod = (values) => {
-  // const { data } = await api.post("/login", values);
-  const data = 'hello' + values
-  return data;
-};
-
-
 const authMethods = {
   apiListeArticles,
-  helloMethod,
 };
 
 export const TndevProvider = ({ children }) => {
-
   const methods = {
     authMethods,
   };
 
-  const [darkColor, setDarkColor] = useState('0');
+  const [darkColor, setDarkColor] = useState("0");
 
   const states = {
-    darkColor, setDarkColor,
+    darkColor,
+    setDarkColor,
   };
 
   return (

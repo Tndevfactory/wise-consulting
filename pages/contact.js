@@ -39,24 +39,27 @@ import CardActions from "@mui/material/CardActions";
 import CardActionArea from "@mui/material/CardActionArea";
 import Container from "@mui/material/Container";
 
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 export default function Contact() {
   const router = useRouter();
+  if (router.isFallback) {
+    <h1>Data is loading</h1>;
+  }
   const [methods, states] = TndevCtx();
   const { darkColor } = states;
   const { authMethods } = methods;
   const { apiListeArticles } = authMethods;
 
   gsap.registerPlugin(ScrollTrigger);
-const  handleSubmit =()=>{
-  console.log('submited')
-}
+  const handleSubmit = () => {
+    console.log("submited");
+  };
   return (
     <>
       <Head>
@@ -75,13 +78,12 @@ const  handleSubmit =()=>{
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item xs={12} md={6}>
-
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1, px: { xs: "1rem", md: "0" } }}
-              >
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1, px: { xs: "1rem", md: "0" } }}
+            >
               <Typography
                 variant="subtitle1"
                 variant="h5"
@@ -103,57 +105,55 @@ const  handleSubmit =()=>{
                 autoComplete="nom"
                 autoFocus
               />
-                <TextField
-                  margin="normal"
-                  color={darkColor === "0" ? "warning" : "secondary"}
-                  size="small"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Adresse Email"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  color={darkColor === "0" ? "warning" : "secondary"}
-                  size="small"
-                  required
-                  fullWidth
-                  id="phone"
-                  label="Numéro de téléphone"
-                  name="phone"
-                  autoComplete="phone"
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  color={darkColor === "0" ? "warning" : "secondary"}
-                  size="small"
-                  multiline
-                  rows={4}
-                  required
-                  fullWidth
-                  id="demande"
-                  label="Sujet de la demande"
-                  name="demande"
-                  autoComplete="phone"
-                  autoFocus
-                />
-                <Button
-                  type="submit"
-                  size="small"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  color={darkColor === "0" ? "warning" : "secondary"}
-                >
-                  Contactez-nous
-                </Button>
-
-              </Box>
-
+              <TextField
+                margin="normal"
+                color={darkColor === "0" ? "warning" : "secondary"}
+                size="small"
+                required
+                fullWidth
+                id="email"
+                label="Adresse Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                color={darkColor === "0" ? "warning" : "secondary"}
+                size="small"
+                required
+                fullWidth
+                id="phone"
+                label="Numéro de téléphone"
+                name="phone"
+                autoComplete="phone"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                color={darkColor === "0" ? "warning" : "secondary"}
+                size="small"
+                multiline
+                rows={4}
+                required
+                fullWidth
+                id="demande"
+                label="Sujet de la demande"
+                name="demande"
+                autoComplete="phone"
+                autoFocus
+              />
+              <Button
+                type="submit"
+                size="small"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                color={darkColor === "0" ? "warning" : "secondary"}
+              >
+                Contactez-nous
+              </Button>
+            </Box>
           </Grid>
           {/* images a propos*/}
           <Grid item xs={12} md={6}>

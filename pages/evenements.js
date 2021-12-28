@@ -17,10 +17,10 @@ import axios from "axios";
 import Link from "next/link";
 import { green, pink } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
 import SendIcon from "@mui/icons-material/Send";
 import CheckIcon from "@mui/icons-material/Check";
-
+import { useRouter } from "next/router";
 import { gsap } from "gsap";
 
 function createData(evenement, date, duree, lieu, prix, rejoindre) {
@@ -67,32 +67,31 @@ const rows = [
     "Bordeau girondelle 75432",
     "gratuit",
     "uid-435"
-  ),  createData(
-      "Atelier Neuropsychologie ",
-      "12/10/2021 ",
-      "3h",
-      "Centre les belaire paris 19ieme",
-      "35€",
-      "uid-465"
-    ),
-    createData(
-      "Psychologie familiale conjugale  ",
-      "02/10/2021 ",
-      "4h",
-      "Belleville issy paris 10ieme",
-      "25€",
-      "uid-455"
-    ),
-    createData(
-      "Séminaire Psychologie cognitive ",
-      "17/09/2021 ",
-      "2h",
-      "paris 16ieme",
-      "gratuit",
-      "uid-465"
-    ),
-
-
+  ),
+  createData(
+    "Atelier Neuropsychologie ",
+    "12/10/2021 ",
+    "3h",
+    "Centre les belaire paris 19ieme",
+    "35€",
+    "uid-465"
+  ),
+  createData(
+    "Psychologie familiale conjugale  ",
+    "02/10/2021 ",
+    "4h",
+    "Belleville issy paris 10ieme",
+    "25€",
+    "uid-455"
+  ),
+  createData(
+    "Séminaire Psychologie cognitive ",
+    "17/09/2021 ",
+    "2h",
+    "paris 16ieme",
+    "gratuit",
+    "uid-465"
+  ),
 ];
 
 export default function Evenements() {
@@ -100,6 +99,10 @@ export default function Evenements() {
   const { darkColor } = states;
   const { authMethods } = methods;
   const { apiListeArticles } = authMethods;
+  const router = useRouter();
+  if (router.isFallback) {
+    <h1>Data is loading</h1>;
+  }
   return (
     <>
       <Head>
@@ -129,14 +132,29 @@ export default function Evenements() {
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead sx={{ bgcolor: darkColor === "0" ? "#45454F" : "#5258EC" , color:'white'}}>
+            <TableHead
+              sx={{
+                bgcolor: darkColor === "0" ? "#45454F" : "#5258EC",
+                color: "white",
+              }}
+            >
               <TableRow>
-                <TableCell  sx={{ color:'white'}}>Intitulé</TableCell>
-                <TableCell  sx={{ color:'white'}} align="right">Date</TableCell>
-                <TableCell  sx={{ color:'white'}} align="right">Durée</TableCell>
-                <TableCell  sx={{ color:'white'}} align="center">Lieu</TableCell>
-                <TableCell  sx={{ color:'white'}} align="right">Prix/personne</TableCell>
-                <TableCell  sx={{ color:'white'}} align="right">Rejoindre</TableCell>
+                <TableCell sx={{ color: "white" }}>Intitulé</TableCell>
+                <TableCell sx={{ color: "white" }} align="right">
+                  Date
+                </TableCell>
+                <TableCell sx={{ color: "white" }} align="right">
+                  Durée
+                </TableCell>
+                <TableCell sx={{ color: "white" }} align="center">
+                  Lieu
+                </TableCell>
+                <TableCell sx={{ color: "white" }} align="right">
+                  Prix/personne
+                </TableCell>
+                <TableCell sx={{ color: "white" }} align="right">
+                  Rejoindre
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -152,15 +170,23 @@ export default function Evenements() {
                   <TableCell align="right">{row.duree}</TableCell>
                   <TableCell align="right">{row.lieu}</TableCell>
                   <TableCell align="right">
-                    <Chip label={row.prix} variant="contained" color={row.prix === 'gratuit' ? 'success': 'error'}/>
-
+                    <Chip
+                      label={row.prix}
+                      variant="contained"
+                      color={row.prix === "gratuit" ? "success" : "error"}
+                    />
                   </TableCell>
                   <TableCell align="right">
-
-                  <Button size='small' color='secondary' disabled={row.rejoindre !== 'uid-435'? true: false}
-                   id={row.rejoindre} variant="outlined" endIcon={<SendIcon />}>
-                    rejoindre
-                  </Button>
+                    <Button
+                      size="small"
+                      color="secondary"
+                      disabled={row.rejoindre !== "uid-435" ? true : false}
+                      id={row.rejoindre}
+                      variant="outlined"
+                      endIcon={<SendIcon />}
+                    >
+                      rejoindre
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

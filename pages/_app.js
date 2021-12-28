@@ -11,7 +11,6 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import favicon from "../public/favicon.ico";
 
 const queryClient = new QueryClient();
 
@@ -44,8 +43,11 @@ const theme = {
   },
 };
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const router = useRouter();
+  if (router.isFallback) {
+    <h1>Data is loading</h1>;
+  }
   return (
     <>
       <CssBaseline />
@@ -58,8 +60,6 @@ export default function App({ Component, pageProps }) {
         <meta name="og:title" property="og:title" content="soft paie" />
         <meta name="twitter:card" content="soft paie" />
         <meta name="robots" content="index, follow" />
-
-        <link rel="icon" href={favicon} />
 
         <title>wise-consult</title>
       </Head>
@@ -77,3 +77,5 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+export default App;
